@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './src/**/*.tsx'
@@ -9,7 +10,7 @@ module.exports = {
         sans: 'Roboto, sans-serif',
       },
       backgroundImage: {
-        blur: 'url(/src/assets/blur-background.png)',
+        blur: `url('./src/assets/blur-background.png')`,
       },
       colors: {
         green: {

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Logo } from '~/components/Logo';
 import { useCreateSubscriberMutation } from '~/graphql/generated';
+import { env } from '~/lib/enviroment';
+import codeMockupImage from '~/assets/code-mockup.png';
 
 export function Subscribe() {
     const [name, setName] = useState('');
@@ -35,6 +37,7 @@ export function Subscribe() {
                         tecnologias mais utilizadas e com alta demanda para acessar
                         as melhores oportunidades do mercado
                     </p>
+                    <p>{env}</p>
                 </div>
                 <div className="p-8 bg-gray-700 border border-gray-500 rounded">
                     <strong className="text-2xl m-6 block">Inscreva-se gratuitamente</strong>
@@ -61,7 +64,7 @@ export function Subscribe() {
                     </form>
                 </div>
             </div>
-            <img src="/src/assets/code-mockup.png" className="mt-10" alt="" />
+            <img src={codeMockupImage} className="mt-10" alt="Mockup" />
         </div>
     );
 }
