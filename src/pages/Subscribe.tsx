@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Logo } from '~/components/Logo';
 import { useCreateSubscriberMutation } from '~/graphql/generated';
-import { env } from '~/lib/enviroment';
 import codeMockupImage from '~/assets/code-mockup.png';
+import blurBackground from '~/assets/blur-background.png';
 
 export function Subscribe() {
     const [name, setName] = useState('');
@@ -12,19 +12,21 @@ export function Subscribe() {
     const [createSubscriber, { loading }] = useCreateSubscriberMutation();
     const navigate = useNavigate();
 
-    async function handleSubscribe(event: FormEvent) {
+    function handleSubscribe(event: FormEvent) {
         event.preventDefault();
-        await createSubscriber({
+        createSubscriber({
             variables: {
                 name,
                 email,
             },
-        });
-        navigate('/event');
+        }).then(() => navigate('/event'));
     }
 
     return (
-        <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
+        <div 
+            style={{ backgroundImage: `url('${blurBackground}')` }}
+            className={`min-h-screen bg-cover bg-no-repeat flex flex-col items-center`}
+        >
             <div className="w-full max-w-[1110px] flex items-center justify-between mt-20 mx-auto">
                 <div className="max-w-[640px]">
                     <Logo />
@@ -37,7 +39,6 @@ export function Subscribe() {
                         tecnologias mais utilizadas e com alta demanda para acessar
                         as melhores oportunidades do mercado
                     </p>
-                    <p>{env}</p>
                 </div>
                 <div className="p-8 bg-gray-700 border border-gray-500 rounded">
                     <strong className="text-2xl m-6 block">Inscreva-se gratuitamente</strong>
