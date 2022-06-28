@@ -1,25 +1,42 @@
-import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Logo } from '~/components/Logo';
 import { useCreateSubscriberMutation } from '~/graphql/generated';
 import codeMockupImage from '~/assets/code-mockup.png';
 import blurBackground from '~/assets/blur-background.png';
 
+interface FormFields {
+    name: string,
+    email: string,
+};
+
+const formSchema = yup.object({
+    name: yup.string()
+        .required('O campo nome é obrigatório!'),
+    email: yup.string()
+        .email('O campo deve ser um email válido!')
+        .required('O campo e-mail é obrigatório'),
+  }).required();
+
 export function Subscribe() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
     const [createSubscriber, { loading }] = useCreateSubscriberMutation();
     const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormFields>({
+        resolver: yupResolver(formSchema),
+    });
 
-    function handleSubscribe(event: FormEvent) {
-        event.preventDefault();
-        createSubscriber({
+    async function handleSubmitForm(fields: FormFields) {
+        const { name, email } = fields;
+        await createSubscriber({
             variables: {
                 name,
                 email,
             },
-        }).then(() => navigate('/event'));
+        });
+        navigate('/event');
     }
 
     return (
@@ -42,19 +59,23 @@ export function Subscribe() {
                 </div>
                 <div className="p-8 bg-gray-700 border border-gray-500 rounded">
                     <strong className="text-2xl m-6 block">Inscreva-se gratuitamente</strong>
-                    <form className="flex flex-col gap-2 w-full" onSubmit={handleSubscribe}>
+                    <form className="flex flex-col gap-2 w-full" onSubmit={handleSubmit(handleSubmitForm)}>
                         <input
                             className="bg-gray-900 rounded px-5 h-14"
                             type="text"
                             placeholder="Seu nome completo"
-                            onChange={event => setName(event.target.value)}
+                            defaultValue=""
+                            {...register("name", { required: true })}
                         />
+                        {errors.name && <span className="text-sm text-red-500">{errors.name.message}</span>}
                         <input
                             className="bg-gray-900 rounded px-5 h-14"
                             type="email"
                             placeholder="Digite seu e-mail"
-                            onChange={event => setEmail(event.target.value)}
+                            defaultValue=""
+                            {...register("email", { required: true })}
                         />
+                        {errors.email && <span className="text-sm text-red-500">{errors.email.message}</span>}
                         <button
                             type="submit"
                             disabled={loading}
