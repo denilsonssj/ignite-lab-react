@@ -2,8 +2,8 @@ import { CaretRight, DiscordLogo, FileArrowDown, Lightning } from 'phosphor-reac
 import { DefaultUi, Player, Youtube } from '@vime/react';
 
 import { useGetLessonBySlugQuery } from '~/graphql/generated';
+import { Spinner } from '~/components/Spinner';
 import '@vime/core/themes/default.css';
-import { Footer } from './Footer';
 
 interface VideoPlayerProps {
     lessonSlug: string;
@@ -16,11 +16,11 @@ export function VideoPlayer({ lessonSlug }: VideoPlayerProps) {
         },
     });
 
-    console.log(data);
-
     if(!data || !data.lesson) {
         return (
-            <div className="flex-1"><p>Carregando...</p></div>
+            <div className="flex-1 justify-center items-center">
+                <Spinner />
+            </div>
         );
     }
 
