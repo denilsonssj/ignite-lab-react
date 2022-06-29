@@ -7,7 +7,6 @@ import { Logo } from '~/components/Logo';
 import { Footer } from '~/components/Footer';
 import { useCreateSubscriberMutation } from '~/graphql/generated';
 import codeMockupImage from '~/assets/code-mockup.png';
-import blurBackground from '~/assets/blur-background.png';
 
 interface FormFields {
     name: string,
@@ -41,10 +40,7 @@ export function Subscribe() {
     }
 
     return (
-        <div 
-            style={{ backgroundImage: `url('${blurBackground}')` }}
-            className={`min-h-screen bg-cover bg-no-repeat flex flex-col items-center`}
-        >
+        <div className={`min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center`}>
             <div className="w-full max-w-[1110px] flex items-center justify-between mt-20 mx-auto">
                 <div className="max-w-[640px]">
                     <Logo />
