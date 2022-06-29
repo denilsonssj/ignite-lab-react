@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Logo } from '~/components/Logo';
+import { Footer } from '~/components/Footer';
 import { useCreateSubscriberMutation } from '~/graphql/generated';
 import codeMockupImage from '~/assets/code-mockup.png';
 import blurBackground from '~/assets/blur-background.png';
@@ -87,6 +88,7 @@ export function Subscribe() {
                 </div>
             </div>
             <img src={codeMockupImage} className="mt-10" alt="Mockup" />
+            <Footer />
         </div>
     );
 }
