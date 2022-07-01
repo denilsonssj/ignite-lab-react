@@ -12,6 +12,7 @@ module.exports = {
       },
       backgroundImage: {
         blur: `url('/src/assets/blur-background.png')`,
+        challenges: `url('/src/assets/challenges-background.png')`,
       },
       colors: {
         green: {

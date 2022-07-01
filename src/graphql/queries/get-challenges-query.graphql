@@ -1,0 +1,11 @@
+query GetChallenges {
+  challenges {
+    id
+    description
+    prize
+    initiationDate
+    url
+    title
+    completionDate
+  }
+}
