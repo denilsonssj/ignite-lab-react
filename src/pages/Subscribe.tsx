@@ -36,7 +36,7 @@ export function Subscribe() {
                 email,
             },
         });
-        navigate('/event');
+        navigate('/event/lesson');
     }
 
     return (

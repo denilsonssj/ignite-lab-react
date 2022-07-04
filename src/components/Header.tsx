@@ -13,7 +13,7 @@ export function Header() {
     const location = useLocation();
     const routes: RouteProps[] = [
         { label: 'Vídeos', url: '/event/lesson' },
-        { label: 'Challenges', url: '/event/challenges'},
+        { label: 'Desafios', url: '/event/challenges'},
     ];
 
     function isRouteActive(url: string) {
