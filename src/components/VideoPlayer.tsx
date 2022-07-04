@@ -58,7 +58,10 @@ export function VideoPlayer({ lessonSlug }: VideoPlayerProps) {
                         )}
                     </div>
                     <div className="flex flex-col gap-4">
-                        <a href="#" className="p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors">
+                        <a
+                            href="https://discord-service.rocketseat.dev/signin/ignite-lab"
+                            className="p-4 text-sm bg-green-500 flex items-center rounded font-bold uppercase gap-2 justify-center hover:bg-green-700 transition-colors"
+                        >
                             <DiscordLogo size={24} />
                             Comunidade do Discord
                         </a>
